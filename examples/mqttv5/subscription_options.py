@@ -19,7 +19,8 @@ def qos():
     print("--------------------------")
 
     callback = utils.Callbacks()
-    client = mqtt.Client(CLIENTID.encode("utf-8"), protocol = mqtt.MQTTv5)
+    #Migrate version 1 to version 2
+    client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION1,CLIENTID.encode("utf-8"), protocol = mqtt.MQTTv5)
     callback.register(client)
     client.connect(host = HOST, port = PORT, clean_start = True)
     client.loop_start()
@@ -49,7 +50,8 @@ def no_local():
     print("--------------------------------")
 
     callback = utils.Callbacks()
-    client = mqtt.Client(CLIENTID.encode("utf-8"), protocol = mqtt.MQTTv5)
+    #Migrate version 1 to version 2
+    client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION1,CLIENTID.encode("utf-8"), protocol = mqtt.MQTTv5)
     callback.register(client)
     client.connect(host = HOST, port = PORT, clean_start = True)
     client.loop_start()
@@ -88,7 +90,8 @@ def retain_as_published():
     utils.clean_retained_message(HOST, PORT, TOPIC)
     
     callback = utils.Callbacks()
-    client = mqtt.Client(CLIENTID.encode("utf-8"), protocol = mqtt.MQTTv5)
+    #Migrate version 1 to version 2
+    client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION1,CLIENTID.encode("utf-8"), protocol = mqtt.MQTTv5)
     callback.register(client)
     client.connect(host = HOST, port = PORT, clean_start = True)
     client.loop_start()
@@ -131,7 +134,8 @@ def retain_handling():
     utils.clean_retained_message(HOST, PORT, TOPIC)
 
     callback = utils.Callbacks()
-    client = mqtt.Client(CLIENTID.encode("utf-8"), protocol = mqtt.MQTTv5)
+    #Migrate version 1 to version 2
+    client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION1,CLIENTID.encode("utf-8"), protocol = mqtt.MQTTv5)
     callback.register(client)
     client.connect(host = HOST, port = PORT, clean_start = True)
     client.loop_start()

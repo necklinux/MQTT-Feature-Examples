@@ -21,7 +21,8 @@ def test_will_message(host, port):
     for i in range(0, 4):
         callback = utils.Callbacks()
         clientid = utils.random_clientid()
-        client = mqtt.Client(clientid.encode("utf-8"), protocol = mqtt.MQTTv5)
+        #Migrate version 1 to version 2
+        client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION1,clientid.encode("utf-8"), protocol = mqtt.MQTTv5)
         callback.register(client)
 
         if i != WILL_RECIPIENT:

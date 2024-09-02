@@ -29,12 +29,14 @@ b_callback = utils.Callbacks()
 
 # a_client as publisher
 a_clientid = utils.random_clientid()
-a_client = mqtt.Client(a_clientid.encode("utf-8"), protocol = mqtt.MQTTv5)
+#Migrate version 1 to version 2
+a_client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION1,a_clientid.encode("utf-8"), protocol = mqtt.MQTTv5)
 a_callback.register(a_client)
 
 # b_client as subsriber
 b_clientid = utils.random_clientid()
-b_client = mqtt.Client(b_clientid.encode("utf-8"), protocol = mqtt.MQTTv5)
+#Migrate version 1 to version 2
+b_client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION1,b_clientid.encode("utf-8"), protocol = mqtt.MQTTv5)
 b_callback.register(b_client)
 
 a_client.connect(host = HOST, port = PORT, clean_start = True)

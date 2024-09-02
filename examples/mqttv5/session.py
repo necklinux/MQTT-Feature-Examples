@@ -73,7 +73,8 @@ def disconnect(client, callback, session_expiry_interval = None):
 
 if __name__=="__main__":
     callback = utils.Callbacks()
-    client = mqtt.Client("", protocol = mqtt.MQTTv5)
+    #Migrate version 1 to version 2
+    client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION1,"", protocol = mqtt.MQTTv5)
     callback.register(client)
 
     assigned_client_id = connect(client, callback, clean_start = True, session_expiry_interval = 300)
@@ -83,7 +84,8 @@ if __name__=="__main__":
     disconnect(client, callback)
 
     # Resume the session using the Client ID returned by the server
-    client = mqtt.Client(assigned_client_id, protocol = mqtt.MQTTv5)
+    #Migrate version 1 to version 2
+    client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION1,assigned_client_id, protocol = mqtt.MQTTv5)
     callback.register(client)
     connect(client, callback, clean_start = False, session_expiry_interval = 300)
 
@@ -97,7 +99,8 @@ if __name__=="__main__":
     # Update session expiry interval when disconnecting
     disconnect(client, callback, session_expiry_interval = 0)
 
-    client = mqtt.Client(assigned_client_id, protocol = mqtt.MQTTv5)
+    #Migrate version 1 to version 2
+    client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION1,assigned_client_id, protocol = mqtt.MQTTv5)
     callback.register(client)
     # Session Present will be 0
     connect(client, callback, clean_start = False, session_expiry_interval = 0)

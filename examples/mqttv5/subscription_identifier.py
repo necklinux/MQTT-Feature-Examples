@@ -33,7 +33,8 @@ def publish(client, topic, payload):
 callback = Callbacks2()
 
 clientid = utils.random_clientid()
-client = mqtt.Client(clientid.encode("utf-8"), protocol = mqtt.MQTTv5)
+#Migrate version 1 to version 2
+client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION1,clientid.encode("utf-8"), protocol = mqtt.MQTTv5)
 callback.register(client)
 
 client.connect(host = HOST, port = PORT, clean_start = True)

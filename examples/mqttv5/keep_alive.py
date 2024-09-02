@@ -26,7 +26,8 @@ def test_keep_alive(host, port, keepalive = 2):
 
     callback = utils.Callbacks()
     clientid = utils.random_clientid()
-    client = ClientWithoutHeartbeat(clientid.encode("utf-8"), protocol = mqtt.MQTTv5)
+    #Migrate version 1 to version 2
+    client = ClientWithoutHeartbeat(mqtt.CallbackAPIVersion.VERSION1,clientid.encode("utf-8"), protocol = mqtt.MQTTv5)
     callback.register(client)
 
     client.connect(host = host, port = port, clean_start = True, keepalive = keepalive)

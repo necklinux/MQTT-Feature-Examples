@@ -100,7 +100,8 @@ def random_string(length = 8):
 
 def clean_retained_message(host, port, topic = "#"):
     callback = Callbacks()
-    client = mqtt.Client("clean retained".encode("utf-8"), protocol = mqtt.MQTTv5)
+    #Migrate version 1 to version 2
+    client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION1,"clean retained".encode("utf-8"), protocol = mqtt.MQTTv5)
     client.loop_start()
     callback.register(client)
     client.connect(host = host, port = port)

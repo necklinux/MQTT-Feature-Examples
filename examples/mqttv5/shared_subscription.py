@@ -21,7 +21,8 @@ def test_shared_subscription_in_mqtt5(host, port):
     for i in range(0, 3):
         callback = utils.Callbacks()
         clientid = utils.random_clientid()
-        client = mqtt.Client(clientid.encode("utf-8"), protocol = mqtt.MQTTv5)
+        #Migrate version 1 to version 2
+        client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION1,clientid.encode("utf-8"), protocol = mqtt.MQTTv5) 
         callback.register(client)
 
         client.connect(host = host, port = port, clean_start = True)
